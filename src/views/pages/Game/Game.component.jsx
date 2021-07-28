@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
-import { calculateWinner } from '../helper';
-import Board from './Board';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { calculateWinner } from '../../../shared/utils';
+import Board from '../../components/Board/Board.component';
+import { getHistory } from './../../../application/selectors/game.selector';
+import { loadGameState, updateGameHistory, setGameStep } from './../../../application/actions/game.actions';
 
 const Game = () => {
+    const dispatch = useDispatch();
+    const gameHistory = useSelector(getHistory);
+
+    useEffect(() => {
+        dispatch(loadGameState);
+    }, [dispatch]);
+
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXisNext] = useState(true);
@@ -17,7 +27,9 @@ const Game = () => {
         // select square
         squares[i] = xO;
         setHistory([...history, squares]);
+        dispatch(updateGameHistory(squares));
         setStepNumber(history.length);
+        dispatch(setGameStep(history.length));
         setXisNext(!xIsNext);
     };
 

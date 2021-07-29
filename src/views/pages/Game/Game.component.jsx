@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { calculateWinner } from '../../../shared/utils';
 import Board from '../../components/Board/Board.component';
-import { getHistory } from './../../../application/selectors/game.selector';
-import { loadGameState, updateGameHistory, setGameStep } from './../../../application/actions/game.actions';
+import { getHistory, getNextPlayer, getStep } from './../../../application/selectors/game.selector';
+import {
+    loadGameState,
+    updateGameHistory,
+    setGameStep,
+    setNextPlayer
+} from './../../../application/actions/game.actions';
 
 const Game = () => {
     const dispatch = useDispatch();
+
     const gameHistory = useSelector(getHistory);
+    const nextPlayer = useSelector(getNextPlayer);
+    const gameStep = useSelector(getStep);
 
     useEffect(() => {
         dispatch(loadGameState);
     }, [dispatch]);
 
-    const [history, setHistory] = useState([Array(9).fill(null)]);
-    const [stepNumber, setStepNumber] = useState(0);
-    const [xIsNext, setXisNext] = useState(true);
-    const winner = calculateWinner(history[stepNumber]);
-    const xO = xIsNext ? 'X' : 'O';
+    const winner = calculateWinner(gameHistory[gameStep]);
+    const xO = nextPlayer ? 'X' : 'O';
 
     const handleClick = (i) => {
-        const current = history[stepNumber];
+        const current = gameHistory[gameStep];
         const squares = [...current];
         // return if won or occupied
         if (winner || squares[i]) return;
         // select square
         squares[i] = xO;
-        setHistory([...history, squares]);
+
         dispatch(updateGameHistory(squares));
-        setStepNumber(history.length);
-        dispatch(setGameStep(history.length));
-        setXisNext(!xIsNext);
+        dispatch(setGameStep(gameHistory.length));
+        dispatch(setNextPlayer(!nextPlayer));
     };
 
     const jumpTo = (step) => {
-        setStepNumber(step);
-        setXisNext(step % 2 === 0);
+        dispatch(setGameStep(step));
+        dispatch(setNextPlayer(step % 2 === 0));
     };
 
     const renderMoves = () =>
-        history.map((_step, move) => {
+        gameHistory.map((_step, move) => {
             const destination = move ? `Go to move #${move}` : 'Go to Start';
             return (
                 <li key={move}>
@@ -50,8 +54,7 @@ const Game = () => {
 
     return (
         <>
-            <h1>React Tic Tac Toe - With Hooks</h1>
-            <Board squares={history[stepNumber]} onClick={handleClick} />
+            <Board squares={gameHistory[gameStep]} onClick={handleClick} />
 
             <div className='info-wrapper'>
                 <div>

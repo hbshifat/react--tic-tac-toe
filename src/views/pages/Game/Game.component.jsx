@@ -1,27 +1,52 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { calculateWinner } from '../../../shared/utils';
+
+// @Component
 import Board from '../../components/Board/Board.component';
-import { getHistory, getNextPlayer, getStep } from './../../../application/selectors/game.selector';
+
+// @Ulits
+import { calculateWinner } from '../../../shared/utils';
+
+// @Actions
 import {
-    loadGameState,
-    updateGameHistory,
     setGameStep,
-    setNextPlayer
+    loadGameState,
+    setNextPlayer,
+    updateGameHistory
 } from './../../../application/actions/game.actions';
 
-const Game = () => {
-    const dispatch = useDispatch();
+// @Selectors
+import { getHistory, getNextPlayer, getStep } from './../../../application/selectors/game.selector';
 
+/**
+ *
+ * @returns React.Element
+ */
+const Game = () => {
+    // Fetch history of the game from selector
     const gameHistory = useSelector(getHistory);
+
+    // Get next player of the game from selector
     const nextPlayer = useSelector(getNextPlayer);
+
+    // Get game step from selector
     const gameStep = useSelector(getStep);
 
+    // Calculate winner based on user action
+    const winner = calculateWinner(gameHistory[gameStep]);
+
+    // Declare dispatch using hook
+    const dispatch = useDispatch();
+
+    /**
+     * Declare useEffect hook
+     * Trigger initial action name 'loadGameState'
+     *
+     */
     useEffect(() => {
         dispatch(loadGameState);
     }, [dispatch]);
 
-    const winner = calculateWinner(gameHistory[gameStep]);
     const xO = nextPlayer ? 'X' : 'O';
 
     const handleClick = (i) => {
@@ -42,27 +67,9 @@ const Game = () => {
         dispatch(setNextPlayer(step % 2 === 0));
     };
 
-    const renderMoves = () =>
-        gameHistory.map((_step, move) => {
-            const destination = move ? `Go to move #${move}` : 'Go to Start';
-            return (
-                <li key={move}>
-                    <button onClick={() => jumpTo(move)}>{destination}</button>
-                </li>
-            );
-        });
-
     return (
         <>
-            <Board squares={gameHistory[gameStep]} onClick={handleClick} />
-
-            <div className='info-wrapper'>
-                <div>
-                    <h3>History</h3>
-                    {renderMoves()}
-                </div>
-                <h3>{winner ? 'Winner: ' + winner : 'Next Player: ' + xO}</h3>
-            </div>
+            <p className='text-primary-default'>Hello</p>
         </>
     );
 };

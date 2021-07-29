@@ -67,7 +67,7 @@ const SetNextPlayerEffect =
     (action) => {
         next(action);
         if (action.type === SET_NEXT_PLAYER) {
-            const nextPlayer = +sessionStorage.getItem('NEXT_PLAYER');
+            const nextPlayer = JSON.parse(sessionStorage.getItem('NEXT_PLAYER'));
             if (typeof nextPlayer === 'boolean') {
                 sessionStorage.setItem('NEXT_PLAYER', action.payload);
             } else {

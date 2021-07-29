@@ -14,15 +14,20 @@
         "react-router-dom": "^5.2.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.6",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
         "enzyme-to-json": "^3.6.2",
         "web-vitals": "^1.0.1"
     },
     "devDependencies": {
-        "node-sass": "^4.14.1"
+        "@craco/craco": "^6.1.1",
+        "@tailwindcss/postcss7-compat": "^2.0.3",
+        "autoprefixer": "^9.8.6",
+        "node-sass": "4.14.1",
+        "postcss": "^7.0.35"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "craco start",
+        "build": "craco build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },

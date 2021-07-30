@@ -1,0 +1,13 @@
+.game--wrapper {
+    width: 50%;
+}
+
+// Action buttons
+.action--btn {
+    padding: 16px 40px;
+    @apply bg-white-400 rounded-5;
+
+    &[disabled] {
+        @apply bg-white-100 text-black-300 cursor-not-allowed;
+    }
+}

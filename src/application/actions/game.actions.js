@@ -3,6 +3,7 @@ export const LOAD_GAME_STATE_SUCCESS = '[GAME] Load Game State Success';
 export const UPDATE_GAME_HISTORY = '[GAME] Update Game History';
 export const SET_GAME_STEP = '[GAME] Set Game Step';
 export const SET_NEXT_PLAYER = '[GAME] Set Next Player';
+export const RESET_GAME = '[GAME] Reset game';
 
 export const loadGameState = {
     type: LOAD_GAME_STATE
@@ -27,3 +28,7 @@ export const setNextPlayer = (SET_GAME_STEP) => ({
     type: SET_NEXT_PLAYER,
     payload: SET_GAME_STEP
 });
+
+export const resetGame = {
+    type: RESET_GAME
+};

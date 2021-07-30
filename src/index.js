@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Game from './views/pages/Game/Game.component';
-import { configureStore } from './application/store';
 import reportWebVitals from './reportWebVitals';
+
+// Import store configuration
+import { configureStore } from './application/store';
+
+// Import root component
+import Root from './views';
 
 // Import Global Style
 import './styles/style.scss';
 
 ReactDOM.render(
     <React.StrictMode>
+        {/* Pass Store Configaration Here */}
         <Provider store={configureStore()}>
-            <Game />
+            <Root />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

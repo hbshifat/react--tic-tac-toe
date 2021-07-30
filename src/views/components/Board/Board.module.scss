@@ -1,0 +1,7 @@
+.board {
+    @apply bg-white-400 border-2 border-white-400 gap-2;
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}

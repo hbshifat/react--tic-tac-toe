@@ -3,7 +3,8 @@ import {
     LOAD_GAME_STATE,
     UPDATE_GAME_HISTORY,
     SET_GAME_STEP,
-    SET_NEXT_PLAYER
+    SET_NEXT_PLAYER,
+    RESET_GAME
 } from '../actions/game.actions';
 
 const LoadGameStateEffect =
@@ -16,7 +17,6 @@ const LoadGameStateEffect =
                 let Step = +sessionStorage.getItem('STEP');
                 let History = JSON.parse(sessionStorage.getItem('HISTORY'));
                 let NextPlayer = JSON.parse(sessionStorage.getItem('NEXT_PLAYER'));
-                debugger;
                 if (typeof Step === 'number' && Array.isArray(History) && typeof NextPlayer === 'boolean') {
                     dispatch(loadGameStateSuccess({ History, Step, NextPlayer }));
                 } else {
@@ -53,7 +53,6 @@ const SetStepEffect =
         if (action.type === SET_GAME_STEP) {
             const step = +sessionStorage.getItem('STEP');
             if (typeof step === 'number') {
-                debugger;
                 sessionStorage.setItem('STEP', action.payload);
             } else {
                 sessionStorage.setItem('STEP', 0);
@@ -76,6 +75,18 @@ const SetNextPlayerEffect =
         }
     };
 
-const EffectList = [LoadGameStateEffect, UpdateGameHistoryEffect, SetStepEffect, SetNextPlayerEffect];
+const resetGameEffect =
+    ({ dispatch }) =>
+    (next) =>
+    (action) => {
+        next(action);
+        if (action.type === RESET_GAME) {
+            sessionStorage.setItem('STEP', 0);
+            sessionStorage.setItem('HISTORY', JSON.stringify([Array(9).fill(null)]));
+            sessionStorage.setItem('NEXT_PLAYER', true);
+        }
+    };
+
+const EffectList = [LoadGameStateEffect, UpdateGameHistoryEffect, SetStepEffect, SetNextPlayerEffect, resetGameEffect];
 
 export default EffectList;

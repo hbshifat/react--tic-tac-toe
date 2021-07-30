@@ -1,0 +1,14 @@
+/*====================== Start: Home Page Basic Style==========================*/
+.home {
+    @apply w-full h-full;
+    background-image: url('../../../assets/images/bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+// Start button
+.start--btn {
+    letter-spacing: 0.1em;
+    @apply py-16 px-40 bg-white-400 text-16 font-mon font-semibold rounded-6 mt-100;
+}

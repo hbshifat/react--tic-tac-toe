@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind utilities;
+
 /*-------------------Start: Common Style------------------*/
 html,
 body {
@@ -11,13 +12,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-// body {
-//     font-family: ;
-//     font-weight: 400;
-//     background-color: ;
-//     color: $text-primary-color;
-// }
 
 // .container
 .container {

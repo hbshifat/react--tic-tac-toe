@@ -13,7 +13,7 @@ for (let i = 0; i <= 128; i++) {
 //------------------------------
 // @FontSize
 //-------------------------------
-for (let i = 10; i <= 40; i++) {
+for (let i = 10; i <= 100; i++) {
     fontSize[i] = [`${i}px`, `${i}px`];
 }
 
@@ -56,13 +56,18 @@ module.exports = {
 
         colors: {
             black: {
+                300: '#474B55',
+                400: '#343434',
                 default: '#000000'
             },
             white: {
+                100: '#a9a9a9',
+                400: '#FEFAEE',
                 default: '#FFFFFF'
             },
             primary: {
-                default: '#315EFF'
+                default: '#FFC700',
+                600: '#f6bc00'
             }
         },
         borderWidth: {

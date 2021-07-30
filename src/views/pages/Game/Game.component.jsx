@@ -17,9 +17,10 @@ import History from '../../components/History/History.component';
 const Game = () => {
     // Using Custom hook name 'useGameLogic'
     const [gameHistory, gameStep, winner, routeHistroy, player, handleClick, resetGameNow] = useGameLogic();
+    const current = gameHistory?.length ? gameHistory.at(gameStep) : [];
 
     const playerText = (
-        <p>
+        <p className='text'>
             next player is <span className='text-white-default'>{player}</span>
         </p>
     );
@@ -34,7 +35,7 @@ const Game = () => {
      * Start: Header section
      */
     const header = (
-        <header className='mb-100'>
+        <header className='header mb-100'>
             <h3 className='text-center text-30 text-black-400 font-medium uppercase'>
                 {winner ? winnerText : playerText}
             </h3>
@@ -47,7 +48,7 @@ const Game = () => {
     const mainSection = (
         <div className={style['game--wrapper']}>
             <main className='flex justify-center mb-100 gap-30'>
-                <Board squares={gameHistory[gameStep]} onClick={handleClick} />
+                <Board squares={current} onClick={handleClick} />
                 <History gameHistory={gameHistory} />
             </main>
         </div>

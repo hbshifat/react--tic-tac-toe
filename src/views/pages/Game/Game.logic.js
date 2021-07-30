@@ -28,7 +28,7 @@ export const useGameLogic = () => {
     const gameStep = useSelector(getStep);
 
     // Calculate winner based on user action
-    const winner = calculateWinner(gameHistory[gameStep]);
+    const winner = calculateWinner(gameHistory?.at(gameStep));
 
     // find next player
     const player = nextPlayer ? 'X' : 'O';

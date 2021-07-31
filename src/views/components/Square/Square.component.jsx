@@ -17,4 +17,9 @@ const Square = ({ value, onClick }) => {
  * Declare Square Component prop types
  */
 
+Square.propTypes = {
+    value: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+};
+
 export default Square;

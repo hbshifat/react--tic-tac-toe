@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 // @style
 import style from './History.module.scss';
 // @actions
@@ -33,6 +34,10 @@ const GameHistory = ({ gameHistory }) => {
             <ul>{renderMoves()}</ul>
         </section>
     );
+};
+
+GameHistory.propTypes = {
+    gameHistory: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
 };
 
 export default GameHistory;

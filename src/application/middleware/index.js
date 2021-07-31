@@ -1,3 +1,3 @@
 import gameEffect from './game.middleware';
-
-export default [...gameEffect];
+const list = [...gameEffect];
+export default list;
